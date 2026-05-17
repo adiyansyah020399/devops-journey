@@ -1,0 +1,42 @@
+services:
+
+  # Service 1 - Web Frontend
+  web:
+    image: nginx:alpine
+    container_name: frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+    depends_on:
+      - api
+
+  # Service 2 - Simple API
+  api:
+    image: python:3.11-alpine
+    container_name: backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    command: python app.py
+    depends_on:
+      - db
+
+  # Service 3 - Database
+  db:
+    image: mysql:8.0
+    container_name: database
+    environment:
+      MYSQL_ROOT_PASSWORD: devops123
+      MYSQL_DATABASE: devopsdb
+      MYSQL_USER: devops
+      MYSQL_PASSWORD: devops123
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
