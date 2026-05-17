@@ -6,3 +6,5 @@ node_modules/
 
 # env
 .env
+actions-runner/
+actions-runner/
