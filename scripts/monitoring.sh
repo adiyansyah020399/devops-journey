@@ -70,3 +70,4 @@ cek_disk >> $LOG_FILE
 cek_memory >> $LOG_FILE
 echo "" >> $LOG_FILE
 
+# Script diupdate di branch baru
