@@ -1,0 +1,12 @@
+services:
+
+  web:
+    image: nginx
+
+    container_name: devops-compose-lab
+
+    ports:
+      - "9090:80"
+
+    volumes:
+      - ./:/usr/share/nginx/html
