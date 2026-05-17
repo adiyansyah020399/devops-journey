@@ -25,3 +25,28 @@ jobs:
           context: ./claude/cicd-demo
           push: true
           tags: xowhacks/cicd-demo:latest
+
+  deploy-to-server:
+    runs-on: ubuntu-latest
+    needs: build-and-push # Job ini baru jalan setelah build-and-push sukses
+
+    steps:
+      - name: Executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: devops
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Menarik image terbaru dari Docker Hub..."
+            docker pull xowhacks/cicd-demo:latest
+            
+            echo "Menghentikan kontainer lama jika ada..."
+            docker stop cicd-app-container || true
+            docker rm cicd-app-container || true
+            
+            echo "Menjalankan kontainer baru..."
+            docker run -d --name cicd-app-container -p 8080:80 xowhacks/cicd-demo:latest
+            
+            echo "Deployment Berhasil! Aplikasi berjalan di port 8080."
