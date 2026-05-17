@@ -1,0 +1,20 @@
+services:
+
+  backend:
+    build: ./backend
+
+    container_name: backend-api
+
+    ports:
+      - "3000:3000"
+
+  frontend:
+    image: nginx
+
+    container_name: frontend-nginx
+
+    ports:
+      - "8080:80"
+
+    volumes:
+      - ./frontend:/usr/share/nginx/html

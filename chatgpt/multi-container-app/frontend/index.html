@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multi Container App</title>
+</head>
+<body>
+
+    <h1>🚀 Multi Container App</h1>
+
+    <button onclick="loadMessage()">
+        Get Backend Message
+    </button>
+
+    <p id="result"></p>
+
+    <script>
+        async function loadMessage() {
+
+            const response =
+                await fetch("http://localhost:3000");
+
+            const data = await response.json();
+
+            document.getElementById("result")
+                .innerText = data.message;
+        }
+    </script>
+
+</body>
+</html>
