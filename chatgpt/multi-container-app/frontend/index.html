@@ -5,7 +5,7 @@
 </head>
 <body>
 
-    <h1>🚀 Multi Container App</h1>
+    <h1> Multi Container App</h1>
 
     <button onclick="loadMessage()">
         Get Backend Message
@@ -17,7 +17,7 @@
         async function loadMessage() {
 
             const response =
-                await fetch("http://localhost:3000");
+                await fetch("/api/");
 
             const data = await response.json();
 

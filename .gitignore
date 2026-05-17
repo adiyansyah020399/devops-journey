@@ -3,3 +3,6 @@ monitoring.log
 
 # Node modules
 node_modules/
+
+# env
+.env
