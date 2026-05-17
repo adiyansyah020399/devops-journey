@@ -11,17 +11,17 @@ jobs:
 
     steps:
       - name: Checkout kode
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Login ke Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build dan Push Docker Image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./claude/cicd-demo
           push: true
           tags: xowhacks/cicd-demo:latest
